@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leaderelection-deployment
+spec:
+  selector:
+    matchLabels:
+      app: leaderelection
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: leaderelection
+    spec:
+      containers:
+      - name: leader-elect
+        image: acribis.azurecr.io/leader-elect:latest
+        env:
+          - name: DistributedLockOptions__StorageConnectionString
+            value: 
+          - name: DistributedLockOptions__StorageBlobName
+            value: lock
+          - name: DistributedLockOptions__StorageContainerName
+            value: leader-elect
+          - name: INSTRUMENTATION_KEY
+            value: 

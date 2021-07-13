@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /src
+COPY ["Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj", "Ibis.MutexLeaderElection/"]
+COPY ["Ibis.MutexLeaderElection.Sample/Ibis.MutexLeaderElection.Sample.csproj", "Ibis.MutexLeaderElection.Sample/"]
+RUN dotnet restore "Ibis.MutexLeaderElection.Sample/Ibis.MutexLeaderElection.Sample.csproj"
+
+COPY . .
+
+WORKDIR "/src/Ibis.MutexLeaderElection.Sample"
+
+RUN dotnet build "Ibis.MutexLeaderElection.Sample.csproj" -c Release -o /app
+
+FROM build AS publish
+
+RUN dotnet publish "Ibis.MutexLeaderElection.Sample.csproj" -c Release -o /app
+
+FROM base AS final
+
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "Ibis.MutexLeaderElection.Sample.dll"]
