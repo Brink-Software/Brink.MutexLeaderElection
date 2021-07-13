@@ -17,6 +17,11 @@ namespace Ibis.MutexLeaderElection
         private readonly DistributedLockOptions _distributedLockOptions;
         private readonly BlobContainerClient _containerClient;
 
+        /// <summary>
+        /// Create a new instance of DistributedLock using the specified configuration
+        /// </summary>
+        /// <param name="logger">Logger instance to use</param>
+        /// <param name="distributedLockOptions">The Azure Blob Storage configuration to use</param>
         public DistributedLock(ILogger<DistributedLock> logger, DistributedLockOptions distributedLockOptions)
         {
             _logger = logger;
@@ -34,6 +39,11 @@ namespace Ibis.MutexLeaderElection
             }
         }
 
+        /// <summary>
+        /// Try to acquire a lease on the blob. Creates the blob and/or container on first lock if they do not exist
+        /// </summary>
+        /// <param name="cancellationToken">Token used to cancel the operation</param>
+        /// <returns>True if the lock is acquired, false otherwise</returns>
         public async Task<bool> TryAcquireLockAsync(CancellationToken cancellationToken)
         {
             try
@@ -61,6 +71,11 @@ namespace Ibis.MutexLeaderElection
             }
         }
 
+        /// <summary>
+        /// Try to renew the lease on the blob
+        /// </summary>
+        /// <param name="cancellationToken">Token used to cancel the operation</param>
+        /// <returns>True if the renewal completed succesfully, false otherwise</returns>
         public async Task<bool> TryRenewLockAsync(CancellationToken cancellationToken)
         {
             if (_lockId == null)
@@ -80,6 +95,9 @@ namespace Ibis.MutexLeaderElection
             }
         }
 
+        /// <summary>
+        /// Try to explicitly release the lock
+        /// </summary>
         public async Task TryReleaseLockAsync()
         {
             if (_lockId == null)

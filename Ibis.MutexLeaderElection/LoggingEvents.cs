@@ -11,6 +11,6 @@
         ReleaseFailed,
 
         Completed = 100,
-        CompletionException
+        CompletedWithException
     }
 }
