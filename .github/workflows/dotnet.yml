@@ -20,8 +20,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
-    - name: Upload Artifact
-      uses: actions/upload-artifact@master
+      run: dotnet build --configuration Release --no-restore
+    - name: Upload WebApp2 Build Artifact
+      uses: actions/upload-artifact@v2
       with:
-        path: ./**
+        name: Build outputs
+        path: /home/runner/work/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/bin/Debug/netstandard2.1/
