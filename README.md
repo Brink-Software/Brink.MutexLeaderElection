@@ -6,6 +6,9 @@ Implementation of the [Leader Election pattern](https://docs.microsoft.com/en-us
 
 This repository is heavily based on the code provided in the link shown above, but with updated libs and available as a NuGet package.
 
+
+[Download the NuGet package](https://www.nuget.org/packages/Ibis.MutexLeaderElection) [![NuGet Status](http://img.shields.io/nuget/v/Ibis.MutexLeaderElection.svg?style=flat)](https://www.nuget.org/packages/Ibis.MutexLeaderElection/)
+
 # Usage
 
 A sample application is included that demonstrates the use based on the following scenario:
