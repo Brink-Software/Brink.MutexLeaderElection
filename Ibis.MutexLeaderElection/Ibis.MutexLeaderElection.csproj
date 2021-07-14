@@ -3,14 +3,14 @@
 		<Version>1.2</Version>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Company>brinksoftware</Company>
 		<Authors>brinksoftware</Authors>
 		<Description>Implementation of the Leader Election pattern based on a distributed lock by taking a lease on an Azure Storage Blob.</Description>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<RepositoryUrl>https://github.com/Ibis-Software/Ibis.MutexLeaderElection</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/Ibis-Software/Ibis.MutexLeaderElection</PackageProjectUrl>
-		<PackageId>Jabnbn</PackageId>
+		<PackageId>Ibis.MutexLeaderElection</PackageId>
 		<FileVersion>1.2.0.0</FileVersion>
 		<AssemblyVersion>1.2.0.0</AssemblyVersion>
 	</PropertyGroup>
