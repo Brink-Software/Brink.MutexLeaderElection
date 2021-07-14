@@ -29,4 +29,4 @@ jobs:
         name: Build outputs
         path: /home/runner/work/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/bin/Release/
     - name: Publish NuGet using Dotnet
-      run: dotnet nuget push nuget/*.nupkg --api-key ${{secrets.NUGET}} -skip-duplicate --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push nuget/*.nupkg --api-key ${{secrets.NUGET}} --skip-duplicate --source https://api.nuget.org/v3/index.json
