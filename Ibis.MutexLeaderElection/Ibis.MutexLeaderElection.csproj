@@ -10,6 +10,7 @@
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<RepositoryUrl>https://github.com/Ibis-Software/Ibis.MutexLeaderElection</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/Ibis-Software/Ibis.MutexLeaderElection</PackageProjectUrl>
+		<PackageId>Ibis.Mutex.LeaderElection</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>
