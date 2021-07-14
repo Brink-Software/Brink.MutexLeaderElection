@@ -16,11 +16,11 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 3.1.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj
     - name: Build
-      run: dotnet build --configuration Release
+      run: dotnet build Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --configuration Release
     - name: Pack with dotnet
       run: dotnet pack Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --output nuget --configuration Release      
     - name: Upload WebApp2 Build Artifact
