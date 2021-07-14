@@ -29,12 +29,4 @@ jobs:
         name: Build outputs
         path: /home/runner/work/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/bin/Release/
     - name: Publish NuGet using Dotnet
-      run: dotnet nuget push A/home/runner/work/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/bin/Release/*.nupkg --api-key ${{secrets.NUGET}} --source https://api.nuget.org/v3/index.json
-      with:
-        PROJECT_FILE_PATH: Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj
-        NUGET_KEY: ${{secrets.NUGET}}        
-    - name: Publish NuGet
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj
-        NUGET_KEY: ${{secrets.NUGET}}
+      run: dotnet nuget push /home/runner/work/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/bin/Release/*.nupkg --api-key ${{secrets.NUGET}} --source https://api.nuget.org/v3/index.json
