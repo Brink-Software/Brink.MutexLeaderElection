@@ -13,11 +13,8 @@
 		<PackageId>MutexLeaderElection</PackageId>
 		<FileVersion>1.2.0.0</FileVersion>
 		<AssemblyVersion>1.2.0.0</AssemblyVersion>
+		<DocumentationFile>Ibis.MutexLeaderElection.xml</DocumentationFile>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DocumentationFile>C:\Sources\LeaderElectionSample\Ibis.MutexLeaderElection\Ibis.MutexLeaderElection.xml</DocumentationFile>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />

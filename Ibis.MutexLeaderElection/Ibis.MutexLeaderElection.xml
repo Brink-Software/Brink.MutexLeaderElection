@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ibis.MutexLeaderElection</name>
+    </assembly>
+    <members>
+        <member name="M:Ibis.MutexLeaderElection.DistributedLock.#ctor(Microsoft.Extensions.Logging.ILogger{Ibis.MutexLeaderElection.DistributedLock},Ibis.MutexLeaderElection.DistributedLockOptions)">
+            <summary>
+            Create a new instance of DistributedLock using the specified configuration
+            </summary>
+            <param name="logger">Logger instance to use</param>
+            <param name="distributedLockOptions">The Azure Blob Storage configuration to use</param>
+        </member>
+        <member name="M:Ibis.MutexLeaderElection.DistributedLock.TryAcquireLockAsync(System.Threading.CancellationToken)">
+            <summary>
+            Try to acquire a lease on the blob. Creates the blob and/or container on first lock if they do not exist
+            </summary>
+            <param name="cancellationToken">Token used to cancel the operation</param>
+            <returns>True if the lock is acquired, false otherwise</returns>
+        </member>
+        <member name="M:Ibis.MutexLeaderElection.DistributedLock.TryRenewLockAsync(System.Threading.CancellationToken)">
+            <summary>
+            Try to renew the lease on the blob
+            </summary>
+            <param name="cancellationToken">Token used to cancel the operation</param>
+            <returns>True if the renewal completed succesfully, false otherwise</returns>
+        </member>
+        <member name="M:Ibis.MutexLeaderElection.DistributedLock.TryReleaseLockAsync">
+            <summary>
+            Try to explicitly release the lock
+            </summary>
+        </member>
+        <member name="T:Ibis.MutexLeaderElection.DistributedLockOptions">
+            <summary>
+            Provides the configuration of the distributed lock.
+            Either use the `TokenCredential` and `StorageContainerUri` properties to connect to the Azure Storage Account
+            or use the `StorageConnectionString` and `StorageContainerName` properties to connect to the Azure Storage Account
+            </summary>
+        </member>
+        <member name="P:Ibis.MutexLeaderElection.DistributedLockOptions.StorageContainerUri">
+            <summary>
+            Uri of the Azure Storage Container that contains the blob that is used to get a lease on
+            </summary>
+        </member>
+        <member name="P:Ibis.MutexLeaderElection.DistributedLockOptions.StorageBlobName">
+            <summary>
+            Name of the Azure Storage Blob  that is used to get a lease on. Default: distributedLock 
+            </summary>
+        </member>
+        <member name="P:Ibis.MutexLeaderElection.DistributedLockOptions.StorageContainerName">
+            <summary>
+            Name of the Azure Storage Container that contains the blob that is used to get a lease on. Default: locks
+            </summary>
+        </member>
+        <member name="P:Ibis.MutexLeaderElection.DistributedLockOptions.StorageConnectionString">
+            <summary>
+            Connection string to the Azure Storage Account
+            </summary>
+        </member>
+        <member name="P:Ibis.MutexLeaderElection.DistributedLockOptions.TokenCredential">
+            <summary>
+            TokenCredential used to access the Azure Storage Account
+            </summary>
+        </member>
+        <member name="P:Ibis.MutexLeaderElection.DistributedLockOptions.LockDuration">
+            <summary>
+            Duration of the lease. Default: 15 seconds. Must be between 15 and 60 seconds
+            </summary>
+        </member>
+        <member name="M:Ibis.MutexLeaderElection.LeaderElection.#ctor(Microsoft.Extensions.Logging.ILogger{Ibis.MutexLeaderElection.LeaderElection},Ibis.MutexLeaderElection.IDistributedLock)">
+            <summary>
+            Create a new instance of LeaderElection with a default lease renewal interval of 3 seconds and a default interval of 3 seconds to try to become elected as the leader
+            </summary>
+            <param name="logger">Logger instance to use</param>
+            <param name="distributedLock">The distributed lock instance to use</param>
+        </member>
+        <member name="M:Ibis.MutexLeaderElection.LeaderElection.#ctor(Microsoft.Extensions.Logging.ILogger{Ibis.MutexLeaderElection.LeaderElection},Ibis.MutexLeaderElection.IDistributedLock,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Create a new instance of LeaderElection
+            </summary>
+            <param name="logger">Logger instance to use</param>
+            <param name="distributedLock">The distributed lock instance to use</param>
+            <param name="renewInterval">The period between lease renewals</param>
+            <param name="acquireInterval">The period between attempts to get elected as the leader</param>
+        </member>
+        <member name="M:Ibis.MutexLeaderElection.LeaderElection.RunTaskWhenElectedLeaderAsync(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            Try to become leader. If it succeeds run a designated task, otherwise wait and retry to be elected
+            </summary>
+            <param name="taskToRunWhenElectedLeader">The task to run once elected as leader</param>
+            <param name="cancellationToken">Cancellation token which is used to cancel the leader task on shutdown</param>
+        </member>
+    </members>
+</doc>
