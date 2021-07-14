@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Company>Brink Software</Company>
+		<Company>brinksoftware</Company>
 		<Authors>Expecho</Authors>
 		<Description>Implementation of the Leader Election pattern based on a distributed lock by taking a lease on an Azure Storage Blob.</Description>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
