@@ -23,10 +23,15 @@ jobs:
       run: dotnet build Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --configuration Release
     - name: Pack with dotnet
       run: dotnet pack Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --output nuget --configuration Release      
-    - name: Upload WebApp2 Build Artifact
+    - name: Upload Assembly Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: Build outputs
+        name: Build output
         path: /home/runner/work/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/Ibis.MutexLeaderElection/bin/Release/
+    - name: Upload Package Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Package output
+        path: nuget/*.nupkg     
     - name: Publish NuGet using Dotnet
       run: dotnet nuget push nuget/*.nupkg --api-key ${{secrets.NUGET}} --skip-duplicate --source https://api.nuget.org/v3/index.json
