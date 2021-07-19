@@ -51,13 +51,13 @@ namespace Ibis.MutexLeaderElection
                 var blc = _blobClient.GetBlobLeaseClient();
                 var leaseResponse = await blc.AcquireAsync(_distributedLockOptions.LockDuration, cancellationToken: cancellationToken);
                 _lockId = leaseResponse.Value.LeaseId;
-                _logger.LogInformation((int)LoggingEvents.LockAcquired, "Lock acquired. Id: {LockId}", _lockId);
+                _logger.LogInformation((int)LoggingEvents.LockAcquired, "Lock acquired. Id: {LockId},{Blob}", _lockId, _blobClient.Uri);
 
                 return true;
             }
             catch (RequestFailedException ex) when (ex.ErrorCode == "BlobNotFound" || ex.ErrorCode == "ContainerNotFound")
             {
-                _logger.LogInformation((int)LoggingEvents.FirstLock, "First lock attempt");
+                _logger.LogInformation((int)LoggingEvents.FirstLock, "First lock attempt. Blob: {Blob}", _blobClient.Uri);
 
                 await _containerClient.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
                 await _blobClient.UploadAsync(Stream.Null, overwrite: true, cancellationToken);
@@ -66,7 +66,7 @@ namespace Ibis.MutexLeaderElection
             }
             catch (RequestFailedException ex) when (ex.ErrorCode == "LeaseAlreadyPresent")
             {
-                _logger.LogDebug((int)LoggingEvents.LockAlreadyTaken, "Lock already acquired");
+                _logger.LogDebug((int)LoggingEvents.LockAlreadyTaken, "Lock already acquired. Blob: {Blob}", _blobClient.Uri);
                 return false;
             }
         }

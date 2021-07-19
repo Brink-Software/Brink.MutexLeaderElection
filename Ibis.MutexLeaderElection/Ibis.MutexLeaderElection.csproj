@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Version>1.3</Version>
+		<Version>1.4</Version>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -11,8 +11,8 @@
 		<RepositoryUrl>https://github.com/Ibis-Software/Ibis.MutexLeaderElection</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/Ibis-Software/Ibis.MutexLeaderElection</PackageProjectUrl>
 		<PackageId>MutexLeaderElection</PackageId>
-		<FileVersion>1.3.0.0</FileVersion>
-		<AssemblyVersion>1.3.0.0</AssemblyVersion>
+		<FileVersion>1.4.0.0</FileVersion>
+		<AssemblyVersion>1.4.0.0</AssemblyVersion>
 		<DocumentationFile>Ibis.MutexLeaderElection.xml</DocumentationFile>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
