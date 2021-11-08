@@ -12,6 +12,9 @@ namespace Ibis.MutexLeaderElection
         private readonly TimeSpan _renewInterval;
         private readonly TimeSpan _acquireInterval;
         private readonly IDistributedLock _distributedLock;
+        private bool _isleader = false;
+
+        public bool IsLeader => _isleader;
 
         /// <summary>
         /// Create a new instance of LeaderElection with a default lease renewal interval of 3 seconds and a default interval of 3 seconds to try to become elected as the leader
@@ -49,12 +52,14 @@ namespace Ibis.MutexLeaderElection
                     continue;
                 }
 
+                _isleader = true;
                 using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 
                 var leaderTask = taskToRunWhenElectedLeader(cts.Token);
                 var renewalTask = KeepRenewingLockAsync(cts.Token);
 
                 await CancelAllWhenAnyCompletes(leaderTask, renewalTask, cts);
+                _isleader = false;
             }
         }
 
