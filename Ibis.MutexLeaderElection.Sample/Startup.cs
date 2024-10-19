@@ -20,9 +20,7 @@ namespace Ibis.MutexLeaderElection.Sample
         {
             var distributedLockOptions = _configuration
                 .GetSection(nameof(DistributedLockOptions))
-                .Get<DistributedLockOptions>();
-
-            services.AddApplicationInsightsTelemetry();
+                .Get<DistributedLockOptions>()!;
 
             services.AddSingleton<ILeaderElection, LeaderElection>();
             services.AddSingleton<IDistributedLock, DistributedLock>();
