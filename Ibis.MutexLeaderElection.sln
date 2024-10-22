@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31424.327
+# 17
+VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ibis.MutexLeaderElection.Sample", "Ibis.MutexLeaderElection.Sample\Ibis.MutexLeaderElection.Sample.csproj", "{58161D71-782E-4F0F-92E8-C98227E2708B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ibis.MutexLeaderElection", "Ibis.MutexLeaderElection\Ibis.MutexLeaderElection.csproj", "{27796B85-703E-47BA-9B36-E5D25B04241E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ibis.MutexLeaderElection.Tests", "Ibis.MutexLeaderElection.Tests\Ibis.MutexLeaderElection.Tests.csproj", "{2BD98A6E-3800-43FC-95CB-2E9D6F34764D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{27796B85-703E-47BA-9B36-E5D25B04241E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27796B85-703E-47BA-9B36-E5D25B04241E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27796B85-703E-47BA-9B36-E5D25B04241E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BD98A6E-3800-43FC-95CB-2E9D6F34764D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BD98A6E-3800-43FC-95CB-2E9D6F34764D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BD98A6E-3800-43FC-95CB-2E9D6F34764D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BD98A6E-3800-43FC-95CB-2E9D6F34764D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
