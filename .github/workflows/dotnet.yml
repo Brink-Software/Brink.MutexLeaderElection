@@ -22,8 +22,13 @@ jobs:
       run: dotnet restore Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj
     - name: Build
       run: dotnet build Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --configuration Release
+    - name: Install Azurite
+      run: npx --yes --loglevel info azurite --version
+    - name: Start Azurite
+      shell: bash
+      run: npx --yes azurite --silent --inMemoryPersistence &
     - name: Run tests
-      run: dotnet test Ibis.MutexLeaderElection.Tests/Ibis.MutexLeaderElection.Tests.csproj --no-build --verbosity normal
+      run: dotnet test Ibis.MutexLeaderElection.Tests/Ibis.MutexLeaderElection.Tests.csproj  --configuration Release --no-build --verbosity normal
     - name: Pack with dotnet
       run: dotnet pack Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --output nuget --configuration Release      
     - name: Upload Assembly Build Artifact
