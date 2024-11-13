@@ -7,9 +7,11 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  SOLUTION_FOLDER: ./
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +30,14 @@ jobs:
       shell: bash
       run: npx --yes azurite --silent --inMemoryPersistence &
     - name: Run tests
-      run: dotnet test Ibis.MutexLeaderElection.Tests/Ibis.MutexLeaderElection.Tests.csproj  --configuration Release --no-build --verbosity normal
+      run: dotnet test Ibis.MutexLeaderElection.Tests/Ibis.MutexLeaderElection.Tests.csproj -logger 'trx;LogFileName=test-results.trx' --configuration Release --no-build --verbosity normal
+      working-directory: ${{ env.SOLUTION_FOLDER }}
+    - name: Upload test report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-report
+        path: ${{ env.SOLUTION_FOLDER }}/**/TestResults/**
     - name: Pack with dotnet
       run: dotnet pack Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --output nuget --configuration Release      
     - name: Upload Assembly Build Artifact
