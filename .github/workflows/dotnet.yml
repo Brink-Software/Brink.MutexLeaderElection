@@ -21,7 +21,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj
     - name: Build
-      run: dotnet build Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --configuration Release
+      run: dotnet build --configuration Release
     - name: Install Azurite
       run: npx --yes --loglevel info azurite --version
     - name: Start Azurite
