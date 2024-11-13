@@ -23,7 +23,7 @@ jobs:
     - name: Build
       run: dotnet build Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --configuration Release
     - name: Run tests
-      run: dotnet test Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.Tests.csproj --no-build --verbosity normal
+      run: dotnet test Ibis.MutexLeaderElection.Tests/Ibis.MutexLeaderElection.Tests.csproj --no-build --verbosity normal
     - name: Pack with dotnet
       run: dotnet pack Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --output nuget --configuration Release      
     - name: Upload Assembly Build Artifact
