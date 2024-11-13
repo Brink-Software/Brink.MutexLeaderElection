@@ -30,7 +30,7 @@ jobs:
       shell: bash
       run: npx --yes azurite --silent --inMemoryPersistence &
     - name: Run tests
-      run: dotnet test Ibis.MutexLeaderElection.Tests/Ibis.MutexLeaderElection.Tests.csproj -logger 'trx;LogFileName=test-results.trx' --configuration Release --no-build --verbosity normal
+      run: dotnet test Ibis.MutexLeaderElection.Tests/Ibis.MutexLeaderElection.Tests.csproj --logger 'trx;LogFileName=test-results.trx' --configuration Release --no-build --verbosity normal
       working-directory: ${{ env.SOLUTION_FOLDER }}
     - name: Upload test report
       uses: actions/upload-artifact@v4
