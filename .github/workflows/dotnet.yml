@@ -1,6 +1,7 @@
 name: .NET
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
@@ -21,6 +22,8 @@ jobs:
       run: dotnet restore Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj
     - name: Build
       run: dotnet build Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --configuration Release
+    - name: Run tests
+      run: dotnet test Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.Tests.csproj --no-build --verbosity normal
     - name: Pack with dotnet
       run: dotnet pack Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --output nuget --configuration Release      
     - name: Upload Assembly Build Artifact
