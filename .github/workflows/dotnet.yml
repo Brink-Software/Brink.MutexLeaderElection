@@ -1,14 +1,17 @@
 name: .NET
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 
+env:
+  SOLUTION_FOLDER: ./
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +23,21 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj
     - name: Build
-      run: dotnet build Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --configuration Release
+      run: dotnet build --configuration Release
+    - name: Install Azurite
+      run: npx --yes --loglevel info azurite --version
+    - name: Start Azurite
+      shell: bash
+      run: npx --yes azurite --silent --inMemoryPersistence &
+    - name: Run tests
+      run: dotnet test Ibis.MutexLeaderElection.Tests/Ibis.MutexLeaderElection.Tests.csproj --logger 'trx;LogFileName=test-results.trx' --configuration Release --no-build --verbosity normal
+      working-directory: ${{ env.SOLUTION_FOLDER }}
+    - name: Upload test report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-report
+        path: ${{ env.SOLUTION_FOLDER }}/**/TestResults/**
     - name: Pack with dotnet
       run: dotnet pack Ibis.MutexLeaderElection/Ibis.MutexLeaderElection.csproj --output nuget --configuration Release      
     - name: Upload Assembly Build Artifact
